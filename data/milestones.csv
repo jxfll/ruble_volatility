@@ -1,0 +1,52 @@
+date,value,type,event
+1914-07-19,1.0000000000,IMP,WWI Declaration (Gold Standard Suspended)
+1914-10-29,0.9200000000,IMP,Ottoman Empire Enters War (Black Sea Blockade)
+1915-02-10,0.8500000000,IMP,Battle of Masurian Lakes (Heavy Losses)
+1915-05-04,0.7800000000,IMP,Gorlice-Tarnow Offensive (Great Retreat Starts)
+1915-09-05,0.7200000000,IMP,Tsar Nicholas II takes Personal Command
+1916-01-15,0.6800000000,IMP,Ruble hits 20% Devaluation Threshold
+1916-06-04,0.6500000000,IMP,Brusilov Offensive Begins
+1916-12-16,0.5800000000,IMP,Assassination of Rasputin
+1917-01-20,0.5500000000,IMP,Mass Strikes in Petrograd
+1917-02-23,0.5200000000,IMP,February Revolution Begins (Women's Day)
+1917-02-27,0.5100000000,IMP,Petrograd Soviet Formed
+1917-03-02,0.5000000000,IMP,Abdication of Nicholas II
+1917-03-03,0.4800000000,IMP,Provisional Government Formed
+1917-04-03,0.4500000000,IMP,Lenin Returns to Petrograd (April Theses)
+1917-05-01,0.4200000000,IMP,Milyukov Note Crisis (Govt Instability)
+1917-06-16,0.3800000000,IMP,June Offensive Begins (Last Imperial Gamble)
+1917-07-04,0.3200000000,IMP,July Days Riots (Peak Volatility)
+1917-07-19,0.3800000000,KER,Kerensky PM (Massive Note Issuance)
+1917-08-25,0.2800000000,IMP,Kornilov Affair (Military Coup Attempt)
+1917-09-01,0.2600000000,KER,Russia Declared Republic
+1917-10-25,0.2200000000,IMP,Winter Palace Stormed (Bolshevik Takeover)
+1917-10-25,0.1500000000,KER,Kerenski Currency Market Crash
+1917-11-08,0.1200000000,SOV,Decree on Land (Private Property Abolished)
+1917-12-14,0.0900000000,IMP,Nationalization of Private Banks
+1918-01-05,0.0750000000,IMP,Constituent Assembly Dissolved
+1918-03-03,0.0600000000,KER,Treaty of Brest-Litovsk (Industrial Land Loss)
+1918-05-14,0.0550000000,SOV,Czech Legion Revolt (Civil War Starts)
+1918-06-28,0.0450000000,SOV,Decree on General Nationalization
+1918-08-30,0.0400000000,SOV,Assassination Attempt on Lenin (Red Terror)
+1918-11-18,0.0350000000,IMP,Admiral Kolchak takes Power in Omsk
+1919-01-11,0.0250000000,SOV,Prodrazvyorstka (Grain Requisitioning)
+1919-03-02,0.0200000000,SOV,First Comintern Congress
+1919-05-15,0.0120000000,SOV,First 'Sovznaks' Formally Issued
+1919-10-13,0.0090000000,SOV,Yudenich Reaches Petrograd Outskirts
+1920-02-07,0.0050000000,SOV,Execution of Kolchak (White Defeat)
+1920-04-25,0.0040000000,SOV,Polish-Soviet War Begins
+1920-08-15,0.0030000000,SOV,Battle of Warsaw (Soviet Retreat)
+1920-11-14,0.0025000000,SOV,Evacuation of Crimea (Wrangel Defeat)
+1921-01-01,0.0010000000,SOV,Hyperinflation Peak (Monthly Rate 50%+)
+1921-02-28,0.0005000000,SOV,Kronstadt Rebellion Begins
+1921-03-21,0.0004000000,SOV,NEP Announced (Market Economy Returns)
+1921-05-01,0.0003000000,SOV,Tambov Rebellion Suppressed
+1921-10-03,0.0001000000,SOV,Gosbank (State Bank) Established
+1922-01-01,0.0000100000,SOV,First Denomination (10000:1)
+1922-04-16,0.0000050000,SOV,Treaty of Rapallo
+1922-10-11,0.0000005000,SOV,Introduction of Gold-Backed Chervonets
+1922-12-30,0.0000003000,SOV,Formation of the USSR
+1923-01-01,0.0000001000,SOV,Second Denomination (100:1)
+1924-02-05,0.0000000500,SOV,Final Monetary Reform (Death of Sovznak)
+1924-03-10,0.0000000100,SOV,Liquidation of Fiat Rubles
+

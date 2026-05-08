@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "ruble-volatility"
+version = "0.1.0"
+description = "Time-series analysis of the ~1917 Ruble collapse"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^5.0"
+psycopg2-binary = "^2.9.9"
+numpy = "^1.26.0"
+pydantic = "^2.6.0"
+django-environ = "^0.13.0"
+pytest = "^9.0.3"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.1.0"
+flake8 = "^7.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
