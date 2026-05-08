@@ -46,7 +46,9 @@ jobs:
       - name: Install Dependencies
         run: |
           poetry config virtualenvs.create false
-          poetry install --no-interaction --no-ansi
+          # The --no-root flag prevents Poetry from trying to install
+          # your project folder as a package, with causes that error.
+          poetry install --no-interaction --no-ansi --no-root
 
       - name: Lint with Flake8
         run: |
