@@ -6,64 +6,6 @@ from .services import VolatilityService
 
 
 class VolatilityMathTest(TestCase):
-    """
-    Verifies the mathematical integrity of the VolatilityService.
-    """
-
-    def setUp(self):
-        # Scenario: 6 days of constant 90% decay
-        # 1.0 -> 0.1 -> 0.01 -> 0.001 -> 0.0001 -> 0.00001
-        for i in range(6):
-            val = 1.0 * (0.1**i)
-            ExchangeRate.objects.create(
-                date=date(1917, 1, i + 1),
-                currency_type="IMP",
-                value_in_gold=Decimal(str(val)),
-                is_milestone=True,
-                event_name=f"Day {i}",
-            )
-
-    def test_log_return_calculation(self):
-        """
-        Tests if the service identifies the massive devaluation.
-        """
-        series = VolatilityService.get_series("IMP")
-
-        # verify we got all the points
-        self.assertEqual(len(series.points), 3)
-
-        # In a 90% drop, volatility should be significantly high (> 0)
-        # Point 1 (index 1) represents the first drop from 1.0 to 0.1
-        self.assertGreater(series.points[1].volatility, 0.5)
-
-    def test_pydantic_structure(self):
-        """
-        Ensures the service returns a valid Pydantic model dump.
-        """
-        analysis = VolatilityService.run_full_analysis()
-
-        # Verify the structure of the Imperial line
-        self.assertEqual(analysis.imperial.label, "Imperial Ruble")
-        self.assertTrue(all(p.value > 0 for p in analysis.imperial.points))
-
-    def test_empty_currency_handling(self):
-        """
-        Ensures the service doesn't crash if a currency has no daya.
-        """
-        series = VolatilityService.get_series("SOV")  # no Sovznak in setUp
-        self.assertEqual(len(series.points), 0)
-        self.assertEqual(series.label, "SOV")
-
-    from decimal import Decimal
-
-
-from datetime import date
-from django.test import TestCase
-from .models import ExchangeRate
-from .services import VolatilityService
-
-
-class VolatilityMathTest(TestCase):
     def setUp(self):
         # Scenario: Exponential collapse (1.0 -> 0.1 -> 0.01)
         # Mathematically, the log-return is constant here: ln(0.1/1) = ln(0.01/0.1)
