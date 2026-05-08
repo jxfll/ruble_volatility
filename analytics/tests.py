@@ -11,20 +11,16 @@ class VolatilityMathTest(TestCase):
     """
 
     def setUp(self):
-        # Create a controlled 3-day hyperinflation schenario
-        # Day 1: 100% -> Day 2: 10% - Day 3: 1%
-        data = [
-            (date(1917, 1, 1), 1.0),
-            (date(1917, 1, 2), 0.1),
-            (date(1917, 1, 3), 0.01),
-        ]
-        for dt, val in data:
+        # Scenario: 6 days of constant 90% decay
+        # 1.0 -> 0.1 -> 0.01 -> 0.001 -> 0.0001 -> 0.00001
+        for i in range(6):
+            val = 1.0 * (0.1**i)
             ExchangeRate.objects.create(
-                date=dt,
+                date=date(1917, 1, i + 1),
                 currency_type="IMP",
                 value_in_gold=Decimal(str(val)),
                 is_milestone=True,
-                event_name="Test Event",
+                event_name=f"Day {i}",
             )
 
     def test_log_return_calculation(self):
