@@ -1,0 +1,1 @@
+# ruble_volatility
