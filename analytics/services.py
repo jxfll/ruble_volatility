@@ -64,7 +64,6 @@ class VolatilityService:
         # We use a 5-point window to identify shocks
         window = 5
         volatilities = []
-        float(np.std(log_returns[max(0, i - (window - 1)) : i + 1]))
         for i in range(len(log_returns)):
             start_idx = max(0, i - window + 1)
             window_slice = log_returns[start_idx : i + 1]
@@ -72,12 +71,12 @@ class VolatilityService:
 
         # Map to pydantic DataPoint objects
         points: List[DataPoint] = []
-        for i, r in enumerate(records):
+        for idx, r in enumerate(records):
             points.append(
                 DataPoint(
                     date=r.date,
-                    value=float(values[i]),
-                    volatility=volatilities[i],
+                    value=float(values[idx]),
+                    volatility=volatilities[idx],
                     is_milestone=r.is_milestone,
                     event_name=r.event_name,
                 )
