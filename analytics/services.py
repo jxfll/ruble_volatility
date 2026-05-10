@@ -76,9 +76,9 @@ class VolatilityService:
                 DataPoint(
                     date=r.date,
                     value=float(values[idx]),
-                    volatility=volatilities[idx],
+                    volatility=float(volatilities[idx]),
                     is_milestone=r.is_milestone,
-                    event_name=r.event_name,
+                    event_name=r.event_name or "",
                 )
             )
 
