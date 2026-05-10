@@ -73,7 +73,7 @@ class VolatilityService:
             points.append(
                 DataPoint(
                     date=r.date,
-                    value=values[i],
+                    value=float(values[i]),
                     volatility=float(volatilities[i]),  # cast back from numpy float
                     is_milestone=r.is_milestone,
                     event_name=r.event_name,

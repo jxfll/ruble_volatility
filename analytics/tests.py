@@ -7,20 +7,15 @@ from .services import VolatilityService
 
 class VolatilityMathTest(TestCase):
     def setUp(self):
-        # Scenario: Exponential collapse (1.0 -> 0.1 -> 0.01)
-        # Mathematically, the log-return is constant here: ln(0.1/1) = ln(0.01/0.1)
-        self.data = [
-            (date(1917, 1, 1), 1.0, "Start"),
-            (date(1917, 1, 2), 0.1, "First Crash"),
-            (date(1917, 1, 3), 0.01, "Second Crash"),
-        ]
-        for dt, val, name in self.data:
+        # Create 6 days of data to stabilize the 5-point window
+        for i in range(6):
+            val = 1.0 * (0.1**i)
             ExchangeRate.objects.create(
-                date=dt,
+                date=date(1917, 1, i + 1),
                 currency_type="IMP",
                 value_in_gold=Decimal(str(val)),
                 is_milestone=True,
-                event_name=name,
+                event_name=f"Day {i}",
             )
 
     def test_mathematical_consistency(self):
@@ -31,8 +26,8 @@ class VolatilityMathTest(TestCase):
 
         # Volatility at index 1 and 2 should be nearly identical
         # because the percentage drop (90%) is the same.
-        vol1 = series.points[1].volatility
-        vol2 = series.points[2].volatility
+        vol1 = series.points[4].volatility
+        vol2 = series.points[5].volatility
 
         # Use almostEqual for floating point comparisons
         self.assertAlmostEqual(vol1, vol2, places=5)
@@ -42,8 +37,9 @@ class VolatilityMathTest(TestCase):
         """
         Tests that the service handles a total value collapse (0.0) safely.
         """
+        ExchangeRate.objects.all().delete()
         ExchangeRate.objects.create(
-            date=date(1917, 1, 4),
+            date=date(1917, 1, 1),
             currency_type="KER",
             value_in_gold=Decimal("0.0"),
             is_milestone=False,
