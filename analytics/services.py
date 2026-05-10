@@ -57,15 +57,18 @@ class VolatilityService:
 
         # Calculate logarithmic rate of change (i.e. velocity of devaluation)
         log_values = np.log(values)
-        log_returns = np.diff(log_values, prepend=log_values[0])
+        log_returns = np.diff(log_values)
+        log_returns = np.insert(log_returns, 0, 0.0)
 
         # Calculate rolling volatility (standard deviation of returns)
         # We use a 5-point window to identify shocks
         window = 5
-        volatilities = [
-            float(np.std(log_returns[max(0, i - (window - 1)) : i + 1]))
-            for i in range(len(log_returns))
-        ]
+        volatilities = []
+        float(np.std(log_returns[max(0, i - (window - 1)) : i + 1]))
+        for i in range(len(log_returns)):
+            start_idx = max(0, i - window + 1)
+            window_slice = log_returns[start_idx : i + 1]
+            volatilities.append(float(np.std(window_slice)))
 
         # Map to pydantic DataPoint objects
         points: List[DataPoint] = []
@@ -74,7 +77,7 @@ class VolatilityService:
                 DataPoint(
                     date=r.date,
                     value=float(values[i]),
-                    volatility=float(volatilities[i]),  # cast back from numpy float
+                    volatility=volatilities[i],
                     is_milestone=r.is_milestone,
                     event_name=r.event_name,
                 )
