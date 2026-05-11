@@ -40,7 +40,7 @@ class VolatilityService:
                 points=[
                     DataPoint(
                         date=r.date,
-                        value=float(r.value_in_gold),
+                        value=r.value_in_gold,
                         volatility=0,
                         is_milestone=r.is_milestone,
                     )
@@ -48,7 +48,7 @@ class VolatilityService:
                 ],
             )
         # Convert Decimal values to float for NumPy compatibility
-        values = np.array([float(r.value_in_gold) for r in records], dtype=np.float64)
+        values = np.array([r.value_in_gold for r in records], dtype=np.float64)
 
         # Epsilon safeguard. Replace 0 or negative with a tiny float
         # This prevents np.log(0) which returns -inf
@@ -72,10 +72,12 @@ class VolatilityService:
         # Map to pydantic DataPoint objects
         points: List[DataPoint] = []
         for idx, r in enumerate(records):
+            safe_val = r.value_in_gold
+            print(r.value_in_gold, safe_val)
             points.append(
                 DataPoint(
                     date=r.date,
-                    value=float(values[idx]),
+                    value=safe_val,
                     volatility=float(volatilities[idx]),
                     is_milestone=r.is_milestone,
                     event_name=r.event_name or "",

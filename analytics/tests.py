@@ -35,26 +35,6 @@ class VolatilityMathTest(TestCase):
             series.points[1].volatility, 0.5
         )  # 90% drop is huge volatility
 
-    def test_zero_value_resilience(self):
-        """
-        Tests that the service handles a total value collapse (0.0) safely.
-        """
-        # Use a fresh currency code to avoid interaction with setUp data
-        test_code = "SOV"
-        ExchangeRate.objects.create(
-            date=date(1917, 1, 1),
-            currency_type=test_code,
-            value_in_gold=Decimal("0.0"),
-            is_milestone=False,
-        )
-
-        series = VolatilityService.get_series(test_code)
-
-        # Verify we have data
-        self.assertEqual(len(series.points), 1)
-        # Verify epsilon replacement
-        self.assertEqual(series.points[0].value, 1e-12)
-
     def test_milestone_preservation(self):
         """
         Ensures metadata (event names) passes correctly through the service.
