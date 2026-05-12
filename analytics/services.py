@@ -72,8 +72,7 @@ class VolatilityService:
         # Map to pydantic DataPoint objects
         points: List[DataPoint] = []
         for idx, r in enumerate(records):
-            safe_val = r.value_in_gold
-            print(r.value_in_gold, safe_val)
+            safe_val = values[idx]
             points.append(
                 DataPoint(
                     date=r.date,

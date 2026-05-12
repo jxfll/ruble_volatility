@@ -1,51 +1,29 @@
-{% extends "analytics/base.html" %}
 {% load static %}
-
-{% block title %}Ruble Volatility Dashboard (1914-1922){% endblock %}
-
-{% block content %}
-<div class="container mx-auto px-4 py-8">
-    <!-- Header Section -->
-    <div class="mb-8 border-b border-gray-200 pb-4">
-        <h1 class="text-3xl font-bold text-gray-900">The Volatility of the Ruble</h1>
-        <p class="text-gray-600">Quantitative analysis of the Imperial, Kerenski, and Soviet currencies.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rouble Volatility Analytics</title>
+    <script src="{% static 'chart.js/dist/chart.umd.js' %}"></script>
+    <script src="{% static 'chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js' %}"></script>
+    <script src="{% static 'hammerjs/hammer.min.js' %}"></script>
+    <script src="{% static 'chartjs-plugin-zoom/dist/chartjs-plugin-zoom.min.js' %}"></script>
+    <script src="{% static 'analytics/js/dashboard.js' %}"></script>
+    <style>
+        body { background: #fafafa; font-family: sans-serif; margin: 40px; }
+        .chart-frame { background: white; padding: 20px; border: 1px solid #ddd; height: 600px; }
+    </style>
+</head>
+<body>
+    <h1>Rouble Hyperinflation Modeling (1917–1922)</h1>
+    <div class="chart-frame">
+        <canvas id="roubleChart"></canvas>
     </div>
-
-    <!-- Main Chart Card -->
-    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-semibold text-gray-800">Historical Devaluation (Logarithmic Scale)</h2>
-            <span class="px-3 py-1 bg-red-100 text-red-800 text-xs font-medium rounded-full">
-                Phase: Hyperinflation
-            </span>
-        </div>
-        
-        <!-- Chart Container: Height is controlled here -->
-        <div class="relative h-[600px] w-full">
-            <canvas id="rubleChart"></canvas>
-        </div>
-    </div>
-
-    <!-- Legend/Info Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="p-4 bg-blue-50 border-l-4 border-blue-500 rounded">
-            <h3 class="font-bold text-blue-900">Imperial Ruble</h3>
-            <p class="text-sm text-blue-800">Gold-backed stability transitioning to war-time fiat.</p>
-        </div>
-        <div class="p-4 bg-orange-50 border-l-4 border-orange-500 rounded">
-            <h3 class="font-bold text-orange-900">Kerenski Ruble</h3>
-            <p class="text-sm text-orange-800">The "Duma" currency; rapid loss of public confidence.</p>
-        </div>
-        <div class="p-4 bg-red-50 border-l-4 border-red-500 rounded">
-            <h3 class="font-bold text-red-900">Sovznak</h3>
-            <p class="text-sm text-red-800">The revolutionary currency leading to hyperinflation.</p>
-        </div>
-    </div>
-</div>
-{% endblock %}
-
-{% block extra_js %}
-<!-- This script kicks off the data fetch from your verified API endpoint -->
-<script src="{% static 'analytics/js/chart_logic.js' %}" defer></script>
-{% endblock %}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initRoubleChart("{% url 'analytics:chart_api' %}");
+        });
+    </script>
+</body>
+</html>
 
