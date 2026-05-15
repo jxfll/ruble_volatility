@@ -32,7 +32,7 @@
 
 1. Склонируйте репозиторий:
    ```bash
-   git clone github.com
+   git clone github.com/jxfll/ruble_volatility
    cd ruble_volatility
    ```
 
