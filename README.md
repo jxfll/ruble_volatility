@@ -28,34 +28,6 @@
 * [Python 3.10+](https://python.orgdownloads/)
 * [Poetry](https://python-poetry.orgdocs/#installation)
 
-### Локальный запуск (Без Docker)
-
-1. Склонируйте репозиторий:
-   ```bash
-   git clone github.com/jxfll/ruble_volatility
-   cd ruble_volatility
-   ```
-
-2. Установите зависимости через Poetry:
-   ```bash
-   poetry install
-   ```
-
-3. Запустите проверку конфигурации:
-   ```bash
-   poetry run python check_system.py
-   ```
-
-4. Примените миграции базы данных:
-   ```bash
-   poetry run python manage.py migrate
-   ```
-
-5. Запустите сервер разработки:
-   ```bash
-   poetry run python manage.py runserver
-   ```
-
 ### Быстрый запуск через Docker
 
 Чтобы автоматически собрать и запустить проект в контейнерах, выполните:
